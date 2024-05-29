@@ -143,11 +143,11 @@ function updateCountdown() {
     if (countdownValue < 0) {
         clearInterval(countdownInterval); // Stop the countdown
         countdownElement.textContent = 'GO LIVE!';
-        if(onLivePage.style.display ==="none"){
+        /*if(onLivePage.style.display ==="none"){
             onLivePage.style.display ="block"
         } else{
             onLivePage.style.display ="block"
-        }
+        }*/
         
     }
 }

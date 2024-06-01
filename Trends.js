@@ -175,11 +175,9 @@ function pageContents(){
         }
         
         
-        /*leftScroll.addEventListener("click", function(){
-            currentCarousel.style.backgroundImage ="url('images/WhatsApp\ Image\ 2024-05-15\ at\ 3.22.12\ PM\ \(2\).jpeg')"
-        })*/
-       
-        for(var i = 0; i < exploreLiveshow.length; i++){
+        /*
+        
+          for(var i = 0; i < exploreLiveshow.length; i++){
             exploreLiveshow[i].addEventListener("click", function(){
                 if(explorePageMobile.style.display ==="block"){
                     explorePageMobile.style.display ="none"
@@ -189,6 +187,7 @@ function pageContents(){
                 }  else{
                     buyingShow.style.display ="block"
                     explorePageMobile.style.display ="none"
+                    bottomIconsRemoval.style.display ="none"
                 }
             })
         }
@@ -204,6 +203,12 @@ function pageContents(){
                 }
             })
         }
+
+        leftScroll.addEventListener("click", function(){
+            currentCarousel.style.backgroundImage ="url('images/WhatsApp\ Image\ 2024-05-15\ at\ 3.22.12\ PM\ \(2\).jpeg')"
+        })*/
+       
+                  
 
           
 

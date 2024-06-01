@@ -1724,6 +1724,7 @@ svg{
     overflow-y: scroll;
     font-family: roboto sans sans-serif;
     scroll-behavior: smooth;
+    transition: all ease 2s;
     }
     .brands-profile-page{
         width: 100%;
@@ -1984,14 +1985,22 @@ svg{
     }
     .current-liveshow-mobile-page-main{
         position: absolute;
-        left: 0;
-        right: 0;
         top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        height: 100%;
         width: 100%;
-        height: 95vh;
-        z-index: 1600;
-        background-color: grey;
         display: none;
+    }
+    video{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        overflow-y: hidden;
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
     }
     #current-liveshow-page{
         display: flex;
@@ -2011,9 +2020,10 @@ svg{
         right: 1rem;
         display: flex;
         flex-direction: row;
-        height: 1.5rem;
+        height: 1.2rem;
         align-items: center;
         color: white;
+        font-size: 1rem;
         padding-left: .4rem;
     }
     #current-liveshow-page input{
@@ -2066,7 +2076,7 @@ svg{
         flex-direction: row;
         align-items: center;
         gap: .5rem;
-        margin-left: .5rem;
+        margin-left: 1.5rem;
         margin-top: .5rem;
         width: 40%;
     }
@@ -2080,19 +2090,11 @@ svg{
         border-radius: 50%;
         background-color: red;
     }
-    .product-lists{
-        display: flex;
-        flex-direction: column;
-        gap: .5rem;
-        position: absolute;
-        top: 6rem;
-        margin-left: .5rem;
-    }
-    .product-upload{
-        background-color: rgb(69, 255, 221);
-        width: 50px;
-        height: 50px;
-    }
+   .video-stats-contents{
+    position: absolute;
+    top: 0; bottom: 0;
+    right: 0; left: 0;
+   }
 
 /* menu style begins */
     .mobile-size-main-menu{
@@ -2244,20 +2246,6 @@ svg{
     
     /*explore page*/
     
-    .explore-page{
-        margin-top: .3rem;
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 2.5rem;
-        right: 0;
-        z-index: 10;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        gap: .3rem;
-        justify-content: center;
-    }
     .show{
         display: none;
     }
@@ -2471,31 +2459,37 @@ svg{
     }
     
     /* live page styling starts here*/
-    .main-live-page{
-        margin-top: 0;
-        margin-right: 0;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 40% 60%;
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 100%;
-        gap: 2rem;
+    video{
+        height: 15rem;
     }
-    .random-liveshow{
-        height: 100%;
-        background-color: rgb(88, 88, 88);
-        border-bottom: .1rem solid rgb(210, 210, 210);   
+    .video-container {
+    position: relative;
+    }
+    .icon {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 15px;
+    height: 15px;
+    z-index: 10;
+    pointer-events: none;
+    }
+    .random-liveshow video{
+        height: 30rem;
+        object-fit: cover;
+        background-blend-mode: multiply;
+    }
+    .random-liveshow #antenna-slide{
+        display: none;
     }
     .click-to-watch{
        display: flex;
+       flex-direction: column;
        justify-content: center;
        align-items: center;
-       align-content: center;
-       position: relative;
-       top: 45%;
-       flex-direction: column;
+       position: absolute;
+       bottom: 0; left: 0; right: 0;
+      
     }
     .click-to-watch h1{
         color: white;
@@ -2505,30 +2499,18 @@ svg{
         width: 5rem;
         fill: white;
     }
-    .recommended-liveshow-lists{
+    .recommended-liveshow{
         display: grid;
-        height: 65rem;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr;
-        margin-left: .5rem; margin-right: .5rem;
-        column-gap: .5rem;
-        row-gap: 1.5rem;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: auto;
+        column-gap: .3rem;
+        row-gap: .15rem;
     }
-    #recommended-liveshow{
-        height: 100%;
-    }
-    #recommended-liveshow h4{
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        margin-top: 0;
-        margin-left: .5rem;
-    }
-    .recommended-liveshow-contents{
-        background-color: rgb(255, 255, 255);
-        border-radius: 1rem;
-        display: grid;
-        grid-template-rows: 85% 10%;
-        gap: 1rem;
+    .master-contents{
+        position: absolute;
+        top: 0; right: 0; left: 0;
+        z-index: 150;
+        height: 60%;
     }
     #show-container{
         background-color: rgb(66, 60, 60);
@@ -2670,78 +2652,6 @@ svg{
         gap: 1rem;
         fill: white;
     }
-    .live-instruments .mic{
-        fill: white;
-    }
-   
-    .product-upload-popup{
-        position: absolute;
-        left: 7%;
-        top: 15%;
-        display: none;
-        z-index: 200;
-        flex-direction: column;
-        width: 85%;
-        height: 60%;
-        background-color: white;
-        justify-content: center;
-        align-items: center;
-    }
-    .x-upload-icon{
-        position: absolute;
-        right: .5rem;
-        top: .5rem;
-    }
-    .save-product{
-        margin-top: 1rem;
-        border: none;
-        padding: .4rem 1.5rem;
-        background-color: black;
-        color: white;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-    }
-    .product-profile{
-        width: 50%;
-        height: 25%;
-        background-color: red;
-    }
-    #product-box-launchpage{
-        fill: white;
-        position: absolute;
-        top: 5rem;
-        left: .5rem;
-        width: 30px;
-        height:30px;
-    }
-    .live-products div h1{
-        text-align: center;
-        color: white;
-        margin-top: .6rem;
-    }
-    #items-box{
-        fill: white;
-        position: absolute;
-        top: 5rem;
-        left: .5rem;
-        width: 30px;
-        height: 30px;
-    }
-    .register-popup{
-        flex-direction: column;
-        position: absolute;
-        top: 7.5rem;
-        display: flex;
-        width: 80%;
-        height: 30%;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        background-color: white;
-        padding: 1rem;
-    }
     .register-popup-container{
         flex-direction: column;
         display: flex;
@@ -2788,6 +2698,8 @@ svg{
         display: flex;
         flex-direction: row;
         align-items: center;
+        position: absolute;
+        top: .2rem;
         gap: .5rem;
         width: 50%;
         height: 6%;

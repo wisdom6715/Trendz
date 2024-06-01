@@ -70,11 +70,12 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
 var stayLive = document.querySelector(".stay");
 var leaveContainer = document.querySelector(".leave-popup-container");
 var liveCancel = document.querySelector(".live-cancel")
 
-liveCancel.addEventListener("click", function(){
+/*liveCancel.addEventListener("click", function(){
     if(leaveContainer.style.display ==="none"){
         leaveContainer.style.display ="flex"
     } else{
@@ -87,7 +88,7 @@ stayLive.addEventListener("click", function(){
     } else{
         leaveContainer.style.display ="none"
     }
-})
+})*/
 
 
 

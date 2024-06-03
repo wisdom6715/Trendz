@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
     <title>Document</title>
     <link rel="stylesheet" href="Authentication.css">
     <style>
@@ -22,14 +23,8 @@
                 <img src="images/Screenshot 2024-05-09 203129.png" alt="" height="40">
                 <h1> Where Every Purchase Tells a Story</h1>
             </div>
-            
-            <div class="login-signup-container">
-                <div class="third-party-auth">
-                    <div class="google-auth" id="google-service">
-                        <img src="images/Keeping Up with Google_ The One Blog to Rule Them All!.jpg" alt="">
-                        <p>Sign up with Google</p>
-                    </div>
-                </div>
+            <div class="signup-auth">
+                <a href="signup.html" class="sign-up"> sign up for free</a>
                 <div class="third-party-auth">
                     <div class="google-auth" id="google-service">
                         <img src="images/Keeping Up with Google_ The One Blog to Rule Them All!.jpg" alt="">
@@ -37,10 +32,11 @@
                     </div>
                 </div>
             </div>
+            <a href="login.html" class="log-in">Login</a>
         </div>     
         </div>
     </section>
 
-    <script src="Authentication.js" defer type="module"></script>
+    <script type="module"  src="Authentication.js"></script>
 </body>
 </html>

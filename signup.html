@@ -31,7 +31,7 @@
                 <input type="password" id="password" name="password" required>
             </div>
             <div class="next-button">
-                <button type="button">Sign up</button>
+                <button onclick="registerUser()" type="button">Sign up</button>
             </div>
             <div class="message" id="message"></div>
         </form>
@@ -40,5 +40,39 @@
     </div>
 
     <script src="Authentication.js" defer type="module"></script>
+    <script>
+        async function registerUser(){
+            const username=document.getElementById('username').value;
+            const email=document.querySelector('.email-input').value; // Changed to querySelector
+            const password=document.getElementById('password').value;
+            const message=document.getElementById('message');
+            try {
+                const response=await fetch('https://trends-s5yl.onrender.com/api/register',{
+                    method:'POST',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({username,email,password})
+                });
+                if (response.ok) {
+                    const data=await response.json();
+                    localStorage.setItem('token',data.token);
+                    localStorage.setItem('username',data.username);
+                    setTimeout(() => {
+                        alert("Login succesful")
+                        window.location.href="Trends.html";
+                    }, 2000);
+                } else {
+                    const errorData=await response.json();
+                    message.style.color='red';
+                    message.textContent="User already exist:";
+                }
+            } catch (error) {
+                console.error("network error",error);
+                message.style.color='red';
+                message.textContent='Network Error:'+error.message;
+            }
+        }
+    </script>
 </body>
 </html>

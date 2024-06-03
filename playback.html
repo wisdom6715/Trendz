@@ -82,6 +82,47 @@
             right: .5rem; top: .5rem;
             fill: white;
         }
+        .comments-container{
+            width: 70%;
+            height: 30%;
+            background-color: rgba(255, 250, 250, 0);
+            position: absolute;
+            bottom: 4rem;
+            left: .5rem;
+            z-index: 200;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+        #submit-comment{
+            background-color: transparent;
+            border: none;
+        }
+        .comment__info {
+            margin: 0;
+            color: white;
+        }
+        .comment__info p{
+            margin: 0;
+        }
+        .user-container{
+            margin-top: .5rem;
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            align-items: center;
+            color: white;
+        }
+        .pic{
+            background-color: aqua;
+            width: 1.5rem;
+            height: 1.5rem;
+            color: white;
+            font-size: 1rem;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
@@ -107,15 +148,39 @@
         </div>
         <div class="lower-contents">
             <div class="commenting-section-in-live">
-                <input type="text" placeholder="Add a comment...">
-                <svg class="send-a-comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><g id="_01_align_center" data-name="01 align center">
-                    <path d="M1.444,6.669a2,2,0,0,0-.865,3.337l3.412,3.408V20h6.593l3.435,3.43a1.987,1.987,0,0,0,1.408.588,2.034,2.034,0,0,0,.51-.066,1.978,1.978,0,0,0,1.42-1.379L23.991.021ZM2,8.592l17.028-5.02L5.993,16.586v-4Zm13.44,13.424L11.413,18h-4L20.446,4.978Z"/></g>
-                </svg>
+                <input type="text" id="comment" placeholder="Add a comment...">
+                <button id="submit-comment">
+                    <svg  class="send-a-comment" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><g id="_01_align_center" data-name="01 align center">
+                        <path d="M1.444,6.669a2,2,0,0,0-.865,3.337l3.412,3.408V20h6.593l3.435,3.43a1.987,1.987,0,0,0,1.408.588,2.034,2.034,0,0,0,.51-.066,1.978,1.978,0,0,0,1.42-1.379L23.991.021ZM2,8.592l17.028-5.02L5.993,16.586v-4Zm13.44,13.424L11.413,18h-4L20.446,4.978Z"/></g>
+                    </svg>
+                </button>
                 <svg xmlns="http://www.w3.org/2000/svg" class="share-icon" viewBox="0 0 32 32" style="height: 30px;">
                     <path d="M2 29a1.12 1.12 0 0 1-.31 0A1 1 0 0 1 1 28v-1A19 19 0 0 1 17 8.24V4a1 1 0 0 1 1.6-.8l12 9a1 1 0 0 1 0 1.6l-12 9A1 1 0 0 1 17 22v-3.75a18.66 18.66 0 0 0-12.07 7.42l-2.12 2.92A1 1 0 0 1 2 29ZM19 6v3.12a1 1 0 0 1-.89 1 17 17 0 0 0-15 14.6l.16-.21a20.68 20.68 0 0 1 14.63-8.4 1 1 0 0 1 .77.26 1 1 0 0 1 .33.74V20l9.33-7Z" data-name="Layer 51" fill="#ffffff" class="fill-101820"/>
                 </svg> 
             </div>
         </div>
+        <div class="comments-container">
+            <!--
+                <div class="comment__card">
+                        <div class="pic center__display">
+                            A
+                        </div>
+                    <div class="comment__info">
+                        <small class="nickname">
+                            UserNameHere
+                        </small>
+                        <p class="comment">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, in magnam! Libero?
+                        </p>
+                       
+                    </div>
+                </div>
+            -->
+        </div>
+        
+        <a href="https://wa.me/2349024531295?text=Hello%2C%20what%20will%20you%20like%20to%20order" target="_blank" class="whatsapp-link">
+            <img src="images/Whatsapp icons for free download _ Freepik.jpg" alt="WhatsApp" height="40">
+        </a>
         <div class="share-popup">
             <div class="share-icons-container">
                 <svg class="cancel-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512.021 512.021" style="enable-background:new 0 0 512.021 512.021;" xml:space="preserve" width="15" height="15">
@@ -150,9 +215,26 @@
         </div>
         <video id="videoPlayer" controls autoplay ></video>
     </div>
-    
-    
-    <script>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
+        import { getFirestore, collection, getDocs} from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js';
+        
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDW8dztrdDOgDGzVfYf-V86oJwQ_hqPKcE",
+            authDomain: "storage-video-26982.firebaseapp.com",
+            projectId: "storage-video-26982",
+            storageBucket: "storage-video-26982.appspot.com",
+            messagingSenderId: "745302805245",
+            appId: "1:745302805245:web:e01bf7c49c3852d8b84c94"
+        };
+
+        // Initialize Firebase
+        const firebase= initializeApp(firebaseConfig);
+        const db = getFirestore(firebase);
+
+
         // Retrieve the video URL from local storage
         const videoURL = localStorage.getItem('currentVideoURL');
 
@@ -179,6 +261,11 @@
                 shareIconsContainer.style.display ="flex"
             }
         })
+
+        const phoneNumber = '2349024531295';
+        const prefilledMessage = encodeURIComponent('Hello, I would like to order');
+        const whatsappLink = `https://wa.me/${phoneNumber}?text=${prefilledMessage}`;
+        document.querySelector('.whatsapp-link').href = whatsappLink;
 
         const link = encodeURI('https://openjavascript.info');
         const msg = encodeURIComponent('Hey, I found this article');
@@ -218,12 +305,91 @@
             }
         });
 
+        const submitBtn = document.querySelector('#submit-comment')
+        const commentsCont = document.querySelector('.comments-container')
+        submitBtn.addEventListener('click', submitFeedback)
 
-   
+        // Initialize feedbackArr as an empty array
+        let feedbackArr = []
+
+        // Function to add feedback to the page
+        function addFeedback(item) {
+            // Select the first letter of the username
+            const letter = (item.userName).charAt(0)
+            // Create a new div
+            const div = document.createElement('div')
+            // Add class
+            div.classList = 'comment__card'
+            // Add id
+            div.id = item.id 
+            // Add HTML
+            const userName = item.userName
+            div.innerHTML = `
+            <div class ="user-container">
+                <div class="pic center__display">
+                    ${letter}
+                </div>   
+                <div class="comment__info">
+                    <small class="nickname">
+                        ${userName}
+                    </small>
+                    <p class="comment">
+                        ${item.userComment}
+                    </p>
+                </div>
+            `
+            // Insert feedback into the list
+            commentsCont.insertAdjacentElement('beforeend', div)
+        }
+                    
+        // Function to reset the form
+        function resetForm() {
+            comment.value = ''
+        }
+
+        // Function to submit feedback
+        function submitFeedback(e) {
+            e.preventDefault()
+            // Get feedback
+            const commentForm = comment.value 
+            // If inputs are not empty
+            if (commentForm !== '') {
+                // Create new feedback
+                const newFeedback = {
+                    id: Math.floor((Math.random() * 1000) + 1).toString(),
+                    userComment: commentForm,
+                    userName: localStorage.getItem('username') // Add userName to the feedback
+                }
+                // Add new feedback to array
+                feedbackArr.push(newFeedback)
+                resetForm()
+                // Add feedback to list
+                addFeedback(newFeedback)
+                // Save feedback to Firestore
+                db.collection("comments").add(newFeedback)
+            }
+        }
+
+        // Function to load feedback from Firestore
+        /*function loadFeedback() {
+            db.collection("comments").get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    addFeedback(doc.data())
+                })
+            })
+        }*/
+        async function loadFeedback() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "comments"));
+                querySnapshot.forEach((doc) => {
+                    addFeedback(doc.data());
+                });
+            } catch (error) {
+                console.error("Error loading feedback:", error);
+            }
+        }
+        // Load feedback when the page loads
+        window.onload = loadFeedback
     </script>
 </body>
 </html>
-
-
-<!--<img class="microphone" src="images/60b0225b-f1ff-4536-817b-c81fd4628047-removebg-preview (1).png" alt="" height="45">
-            <a href="mainlivepage.html">-->  
